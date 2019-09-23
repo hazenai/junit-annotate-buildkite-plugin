@@ -51,9 +51,8 @@ if grep -q "<details>" "$annotation_path"; then
       exit 0
   fi
 
-  echo "--- ANNOTATE THIS PLZ"
+  echo "--- :buildkite: Creating annotation"
   # shellcheck disable=SC2002
-  echo "--- $(uname -m)"
   cat "$annotation_path" | buildkite-agent annotate --context $(uname -m) --style error
 
   if [[ "${BUILDKITE_PLUGIN_JUNIT_ANNOTATE_FAIL_BUILD_ON_ERROR:-false}" =~ (true|on|1) ]]
